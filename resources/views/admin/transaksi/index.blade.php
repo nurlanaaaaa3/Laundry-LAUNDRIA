@@ -216,6 +216,7 @@
                                     <th>Tanggal Masuk</th>
                                     <th>Total</th>
                                     <th>Pembayaran</th>
+                                    <th>Metode</th>
                                     <th>Status Laundry</th>
                                     <th>Kasir</th>
                                     <th>Aksi</th>
@@ -238,6 +239,15 @@
                                             <span class="badge-pill badge-lunas">Lunas</span>
                                         @else
                                             <span class="badge-pill badge-belum">Belum Lunas</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if($item->metode_pembayaran === 'transfer')
+                                            <span style="background:#EAF4FC;color:#07549A;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:20px;">🏦 Transfer</span>
+                                        @elseif($item->metode_pembayaran === 'qris')
+                                            <span style="background:#F5F3FF;color:#7C3AED;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:20px;">📱 QRIS</span>
+                                        @else
+                                            <span style="background:#F0FDF4;color:#15803D;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:20px;">💵 Tunai</span>
                                         @endif
                                     </td>
                                     <td>

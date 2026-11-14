@@ -20,6 +20,7 @@ class Transaksi extends Model
         'dibayar', 
         'kembalian',
         'status_pembayaran',
+        'metode_pembayaran',
         'status_laundry',
         'catatan',
     ];

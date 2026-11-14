@@ -54,6 +54,7 @@ class BookingController extends Controller
     {
         $data = $request->validate([
             'catatan' => 'nullable|string',
+            'metode_pembayaran' => 'required|in:tunai,qris,transfer',
             'layanan' => 'required|array|min:1',
             'layanan.*.id_layanan' => 'required|exists:layanan,id_layanan',
             'layanan.*.jumlah' => 'required|numeric|min:0.1',
@@ -86,6 +87,7 @@ class BookingController extends Controller
                 'dibayar' => 0,
                 'kembalian' => 0,
                 'status_pembayaran' => 'belum_lunas',
+                'metode_pembayaran' => $data['metode_pembayaran'],
                 'status_laundry' => 'menunggu',
                 'catatan' => $data['catatan'] ?? null,
             ]);
@@ -98,7 +100,12 @@ class BookingController extends Controller
             return $transaksi;
         });
 
-        return redirect()->route('pelanggan.dashboard')
-            ->with('success', 'Pesanan berhasil dibuat dengan nomor ' . $transaksi->kode . '. Silakan antar pakaian Anda ke LAUNDRIA.');
+        $pesan = match($transaksi->metode_pembayaran) {
+            'qris'     => 'Pesanan ' . $transaksi->kode_transaksi . ' berhasil! Silakan scan QRIS saat mengambil cucian.',
+            'transfer' => 'Pesanan ' . $transaksi->kode_transaksi . ' berhasil! Silakan transfer via Dana/GoPay/ShopeePay ke 0889-8598-4393 dan konfirmasi ke WhatsApp.',
+            default    => 'Pesanan ' . $transaksi->kode_transaksi . ' berhasil! Silakan antar pakaian ke LAUNDRIA.',
+        };
+
+        return redirect()->route('pelanggan.dashboard')->with('success', $pesan);
     }
 }

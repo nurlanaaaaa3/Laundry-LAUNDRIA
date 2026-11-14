@@ -67,7 +67,14 @@
                     <div class="info-avatar">{{ strtoupper(substr($transaksi->pelanggan->nama_pelanggan ?? 'P', 0, 1)) }}</div>
                     <div>
                         <div class="info-name">{{ $transaksi->pelanggan->nama_pelanggan ?? '-' }}</div>
-                        <div class="info-meta"><i class="bi bi-telephone me-1"></i>{{ $transaksi->pelanggan->no_hp ?? '-' }} &nbsp;·&nbsp; <i class="bi bi-calendar me-1"></i>{{ $transaksi->tanggal_masuk->format('d M Y, H:i') }}</div>
+                        <div class="info-meta">
+                            <i class="bi bi-telephone me-1"></i>{{ $transaksi->pelanggan->no_hp ?? '-' }} &nbsp;·&nbsp;
+                            <i class="bi bi-calendar me-1"></i>{{ $transaksi->tanggal_masuk->format('d M Y, H:i') }} &nbsp;·&nbsp;
+                            @if($transaksi->metode_pembayaran === 'qris') 📱 QRIS
+                            @elseif($transaksi->metode_pembayaran === 'transfer') 🏦 Transfer
+                            @else 💵 Tunai
+                            @endif
+                        </div>
                         <div class="kode-trx"><i class="bi bi-hash"></i>{{ $transaksi->kode_transaksi }}</div>
                     </div>
                 </div>

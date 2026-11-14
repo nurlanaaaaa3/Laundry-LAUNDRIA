@@ -23,7 +23,7 @@
             border-radius: 8px;
             border: 1px solid #D1D5DB;
             font-size: 13.5px;
-            padding: 8px 12px;
+            padding: 8px 32px 8px 12px;
         }
         .row-layanan .select-layanan:focus,
         .row-layanan .input-jumlah:focus {
@@ -195,6 +195,41 @@
 
                         <div class="mb-4">
                             <label class="section-label">
+                                <i class="bi bi-credit-card me-1 text-primary"></i> Metode Pembayaran
+                            </label>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <label style="cursor:pointer; flex:1; min-width:120px;">
+                                    <input type="radio" name="metode_pembayaran" value="tunai" required style="display:none;" id="rb-tunai">
+                                    <div id="card-tunai" onclick="piliMetode('tunai')"
+                                        style="border:2px solid #E5E7EB; border-radius:12px; padding:16px; text-align:center; transition:all 0.2s;">
+                                        <div style="font-size:24px; margin-bottom:6px;">💵</div>
+                                        <div style="font-weight:600; font-size:14px; color:#063B70;">Tunai</div>
+                                        <div style="font-size:11px; color:#94A3B8;">Bayar saat ambil</div>
+                                    </div>
+                                </label>
+                                <label style="cursor:pointer; flex:1; min-width:120px;">
+                                    <input type="radio" name="metode_pembayaran" value="qris" required style="display:none;" id="rb-qris">
+                                    <div id="card-qris" onclick="piliMetode('qris')"
+                                        style="border:2px solid #E5E7EB; border-radius:12px; padding:16px; text-align:center; transition:all 0.2s;">
+                                        <div style="font-size:24px; margin-bottom:6px;">📱</div>
+                                        <div style="font-weight:600; font-size:14px; color:#063B70;">QRIS</div>
+                                        <div style="font-size:11px; color:#94A3B8;">Scan QR Code</div>
+                                    </div>
+                                </label>
+                                <label style="cursor:pointer; flex:1; min-width:120px;">
+                                    <input type="radio" name="metode_pembayaran" value="transfer" required style="display:none;" id="rb-transfer">
+                                    <div id="card-transfer" onclick="piliMetode('transfer')"
+                                        style="border:2px solid #E5E7EB; border-radius:12px; padding:16px; text-align:center; transition:all 0.2s;">
+                                        <div style="font-size:24px; margin-bottom:6px;">🏦</div>
+                                        <div style="font-weight:600; font-size:14px; color:#063B70;">Transfer</div>
+                                        <div style="font-size:11px; color:#94A3B8;">Dana/GoPay/ShopeePay</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="section-label">
                                 <i class="bi bi-chat-left-text me-1 text-primary"></i> Catatan (opsional)
                             </label>
                             <textarea name="catatan" class="form-control" rows="2"
@@ -238,5 +273,17 @@
         const daftarLayanan = @json($layanan);
     </script>
     <script src="{{ asset('js/booking-create.js') }}"></script>
+    <script>
+        function piliMetode(metode) {
+            ['tunai', 'qris', 'transfer'].forEach(function(m) {
+                document.getElementById('rb-' + m).checked = false;
+                document.getElementById('card-' + m).style.border = '2px solid #E5E7EB';
+                document.getElementById('card-' + m).style.background = '#fff';
+            });
+            document.getElementById('rb-' + metode).checked = true;
+            document.getElementById('card-' + metode).style.border = '2px solid #07549A';
+            document.getElementById('card-' + metode).style.background = '#EAF4FC';
+        }
+    </script>
 </body>
 </html>
