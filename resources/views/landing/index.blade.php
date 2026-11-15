@@ -478,24 +478,24 @@
 <body>
 
     {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-laundria sticky-top py-2">
+    <nav class="navbar navbar-expand-lg navbar-laundria sticky-top py-1">
         <div class="container">
             <a class="navbar-brand" href="#beranda">LAUNDRIA</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                <ul class="navbar-nav mx-auto align-items-lg-center gap-lg-1">
                     <li class="nav-item"><a class="nav-link" href="#beranda">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="#tentang">Tentang Kami</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#harga">Harga</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#layanan">Layanan & Harga</a></li>
                     <li class="nav-item"><a class="nav-link" href="#cara-kerja">Cara Kerja</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimoni">Testimoni</a></li>
                     <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                    <li class="nav-item mt-2 mt-lg-0">
-                        <a class="btn btn-cta px-3" href="{{ route('login') }}">Pesan Sekarang</a>
-                    </li>
                 </ul>
+                <div class="d-flex mt-2 mt-lg-0">
+                    <a class="btn btn-cta px-3" href="{{ route('login') }}">Masuk</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -529,7 +529,7 @@
     </section>
 
     {{-- Tentang Kami --}}
-    <section id="tentang" style="background: linear-gradient(160deg, #EAF4FC 0%, #FFFFFF 100%);">
+    <section id="tentang" style="background: #EAF4FC;">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title">Tentang Kami</h2>
@@ -595,41 +595,62 @@
         </div>
     </section>
 
-    {{-- Layanan --}}
-    <section id="layanan" class="bg-white">
+    {{-- Layanan & Harga --}}
+    <section id="layanan" style="background-color: #FFFFFF;">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-title">Layanan Kami</h2>
-                <p class="section-subtitle">Berbagai pilihan layanan laundry sesuai kebutuhan Anda</p>
+                <h2 class="section-title">Layanan & Harga</h2>
+                <p class="section-subtitle">Berbagai pilihan layanan laundry dengan harga transparan</p>
             </div>
             <div class="row g-4">
                 @forelse ($layanan as $item)
-                <div class="col-md-6 col-lg-4">
-                    <div class="p-4 h-100 d-flex flex-column" style="background-color: var(--off-white); border: 1px solid var(--border-c); border-radius: 12px;">
-                        <h5 style="color: var(--dark-blue); font-weight: 600;">{{ $item->nama_layanan }}</h5>
-                        <p class="mb-2" style="color: var(--text-sec); font-size: 14px;">
-                            Estimasi Selesai: {{ $item->estimasi }} jam
-                        </p>
-                        <p class="mb-3" style="color: var(--text-sec); font-size: 13px;">
-                            @if ($item->keterangan)
-                                {{ $item->keterangan }}
-                            @elseif ($item->nama_layanan == 'Cuci Lipat')
-                                Cocok untuk pakaian harian, dicuci bersih dan dilipat rapi.
-                            @elseif ($item->nama_layanan == 'Cuci & Setrika')
-                                Pakaian dicuci bersih, dikeringkan, disetrika halus, dan siap pakai.
-                            @elseif ($item->nama_layanan == 'Setrika Saja')
-                                Untuk pakaian yang sudah dicuci, disetrika rapi agar siap digunakan.
-                            @elseif ($item->nama_layanan == 'Cuci Bed Cover')
-                                Perawatan khusus untuk bed cover agar tetap bersih dan nyaman digunakan.
-                            @elseif ($item->nama_layanan == 'Cuci Selimut & Gorden')
-                                Dibersihkan menyeluruh, bebas debu, dan wangi segar untuk kenyamanan rumah Anda.
-                            @elseif ($item->nama_layanan == 'Boneka & Tas')
-                                Dicuci dengan lembut, menjaga bentuk dan kualitas boneka serta tas kesayangan Anda.
-                            @else
-                                Dikerjakan oleh tim profesional dengan perhatian pada setiap detail agar hasilnya memuaskan.
-                            @endif
-                        </p>
-                        <a href="{{ route('login') }}" class="btn btn-cta btn-sm mt-auto align-self-start">Pilih Layanan</a>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="h-100 d-flex flex-column" style="background:#F8FAFC; border:1px solid #E5E7EB; border-radius:16px; overflow:hidden; transition:all 0.25s ease; box-shadow:0 4px 16px rgba(7,84,154,0.06);"
+                         onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 28px rgba(7,84,154,0.14)';this.style.borderColor='#07549A'"
+                         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(7,84,154,0.06)';this.style.borderColor='#E5E7EB'">
+                        {{-- Header kartu --}}
+                        <div style="background:linear-gradient(135deg,#07549A,#1976B8); padding:14px 16px;">
+                            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                                <div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M8 7h.01M11 7h.01"/></svg>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div style="font-size:18px;font-weight:700;color:#fff;line-height:1.1;">Rp{{ number_format($item->harga, 0, ',', '.') }}</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.75);">per {{ $item->satuan }}</div>
+                                </div>
+                            </div>
+                            <div style="font-size:13px;font-weight:700;color:#fff;margin-top:10px;">{{ $item->nama_layanan }}</div>
+                        </div>
+                        {{-- Body kartu --}}
+                        <div class="d-flex flex-column flex-grow-1" style="padding:12px 16px;">
+                            <p style="color:#64748B;font-size:13.5px;line-height:1.7;flex-grow:1;margin-bottom:14px;">
+                                @if($item->keterangan)
+                                    {{ $item->keterangan }}
+                                @elseif($item->nama_layanan == 'Cuci Lipat')
+                                    Cocok untuk pakaian harian, dicuci bersih dan dilipat rapi.
+                                @elseif($item->nama_layanan == 'Cuci & Setrika')
+                                    Pakaian dicuci bersih, dikeringkan, disetrika halus, dan siap pakai.
+                                @elseif($item->nama_layanan == 'Setrika Saja')
+                                    Untuk pakaian yang sudah dicuci, disetrika rapi agar siap digunakan.
+                                @elseif($item->nama_layanan == 'Cuci Bed Cover')
+                                    Perawatan khusus untuk bed cover agar tetap bersih dan nyaman digunakan.
+                                @elseif($item->nama_layanan == 'Cuci Selimut & Gorden')
+                                    Dibersihkan menyeluruh, bebas debu, dan wangi segar untuk kenyamanan rumah Anda.
+                                @elseif($item->nama_layanan == 'Boneka & Tas')
+                                    Dicuci dengan lembut, menjaga bentuk dan kualitas boneka serta tas kesayangan Anda.
+                                @else
+                                    Dikerjakan oleh tim profesional dengan perhatian pada setiap detail agar hasilnya memuaskan.
+                                @endif
+                            </p>
+                            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+                                @if($item->estimasi)
+                                <span style="font-size:12px;color:#07549A;background:#EAF4FC;border-radius:20px;padding:4px 12px;">
+                                    ⏱ {{ $item->estimasi }} jam
+                                </span>
+                                @endif
+                                <a href="{{ route('login') }}" class="btn btn-cta btn-sm ms-auto">Pilih</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @empty
@@ -639,49 +660,53 @@
         </div>
     </section>
 
-    {{-- Harga --}}
-    <section id="harga" style="background-color: var(--light-blue);">
+    {{-- Cara Kerja --}}
+    <section id="cara-kerja" style="background-color: var(--light-blue);">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-title">Daftar Harga</h2>
-                <p class="section-subtitle">Harga transparan, tanpa biaya tersembunyi</p>
+                <h2 class="section-title">Cara Kerja</h2>
+                <p class="section-subtitle">Proses mudah dalam 4 langkah</p>
+                <p style="color: var(--text-sec); text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+                    Kami membuat proses laundry menjadi lebih praktis, cepat, dan nyaman untuk Anda.
+                    Hanya dalam beberapa langkah, pakaian Anda akan kembali bersih, rapi, wangi,
+                    dan siap digunakan.
+                </p>
             </div>
             <div class="row g-4">
-                @forelse ($layanan as $item)
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div style="background:#FFFFFF; border:1px solid #E5E7EB; border-radius:16px; padding:28px 20px; text-align:center; height:100%; transition:all 0.25s ease; box-shadow:0 4px 16px rgba(7,84,154,0.06);"
-                         onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.14)';this.style.borderColor='#07549A'"
-                         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(7,84,154,0.06)';this.style.borderColor='#E5E7EB'">
-                        <div style="width:56px;height:56px;border-radius:16px;background:#EAF4FC;color:#07549A;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M8 7h.01M11 7h.01"/></svg>
-                        </div>
-                        <div style="font-weight:700;color:#063B70;font-size:15px;margin-bottom:12px;">{{ $item->nama_layanan }}</div>
-                        <div style="font-size:26px;font-weight:700;color:#07549A;line-height:1.1;">Rp{{ number_format($item->harga, 0, ',', '.') }}</div>
-                        <div style="font-size:13px;color:#94A3B8;margin-bottom:10px;">per {{ $item->satuan }}</div>
-                        @if($item->estimasi)
-                        <span style="font-size:12px;color:#07549A;background:#EAF4FC;border-radius:20px;padding:4px 12px;display:inline-block;">
-                            ⏱ {{ $item->estimasi }} jam
-                        </span>
-                        @endif
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-badge">1</div>
+                        <h6>Pesan Sekarang</h6>
+                        <p>Daftar/login lalu pilih layanan laundry yang Anda butuhkan, lalu tentukan jenis perawatan yang sesuai.</p>
                     </div>
                 </div>
-                @empty
-                <div class="col-12 text-center text-muted">Daftar harga belum tersedia.</div>
-                @endforelse
-            </div>
-
-            <div style="margin-top:36px;background:linear-gradient(135deg,#063B70,#07549A);border-radius:16px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;">
-                <div>
-                    <strong style="display:block;color:#FFFFFF;font-weight:600;font-size:1.05rem;">Siap memesan?</strong>
-                    <span style="color:#DCEBFA;font-size:14px;">Pilih layanan dan buat pesanan Anda sekarang.</span>
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-badge">2</div>
+                        <h6>Antar / Jemput</h6>
+                        <p>Antarkan pakaian Anda ke LAUNDRIA untuk diproses dengan teliti, atau manfaatkan layanan jemput agar lebih praktis.</p>
+                    </div>
                 </div>
-                <a href="{{ route('login') }}" style="background:#FFFFFF;color:#063B70;font-weight:600;font-size:15px;text-decoration:none;padding:12px 24px;border-radius:12px;transition:all 0.2s;">Pesan Sekarang</a>
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-badge">3</div>
+                        <h6>Proses Pencucian</h6>
+                        <p>Pakaian dicuci dan dirawat dengan teliti sesuai jenis layanan, agar hasilnya bersih, rapi, dan wangi.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="step-card">
+                        <div class="step-badge">4</div>
+                        <h6>Siap Diambil / Antar</h6>
+                        <p>Pakaian selesai dicuci dan siap diambil atau kami yang akan mengantar ke rumah Anda.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     {{-- Mengapa Memilih LAUNDRIA --}}
-    <section id="mengapa" class="bg-white">
+    <section id="mengapa" style="background-color: #F8FAFC;">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title">Mengapa Memilih LAUNDRIA?</h2>
@@ -729,7 +754,7 @@
     </section>
 
     {{-- Testimoni Pelanggan --}}
-    <section id="testimoni" style="background-color: var(--light-blue);">
+    <section id="testimoni" style="background-color: #FFFFFF;">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title">Apa Kata Pelanggan Kami?</h2>
@@ -779,53 +804,8 @@
         </div>
     </section>
 
-    {{-- Cara Kerja --}}
-    <section id="cara-kerja" style="background-color: var(--off-white);">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title">Cara Kerja</h2>
-                <p class="section-subtitle">Proses mudah dalam 4 langkah</p>
-                <p style="color: var(--text-sec); text-align: center; max-width: 700px; margin: 0 auto 3rem;">
-                    Kami membuat proses laundry menjadi lebih praktis, cepat, dan nyaman untuk Anda.
-                    Hanya dalam beberapa langkah, pakaian Anda akan kembali bersih, rapi, wangi,
-                    dan siap digunakan.
-                </p>
-            </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">1</div>
-                        <h6>Pesan Sekarang</h6>
-                        <p>Daftar/login lalu pilih layanan laundry yang Anda butuhkan, lalu tentukan jenis perawatan yang sesuai.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">2</div>
-                        <h6>Antar / Jemput</h6>
-                        <p>Antarkan pakaian Anda ke LAUNDRIA untuk diproses dengan teliti, atau manfaatkan layanan jemput agar lebih praktis.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">3</div>
-                        <h6>Proses Pencucian</h6>
-                        <p>Pakaian dicuci dan dirawat dengan teliti sesuai jenis layanan, agar hasilnya bersih, rapi, dan wangi.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">4</div>
-                        <h6>Siap Diambil / Antar</h6>
-                        <p>Pakaian selesai dicuci dan siap diambil atau kami yang akan mengantar ke rumah Anda.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     {{-- Kontak --}}
-    <section id="kontak" class="bg-white">
+    <section id="kontak" style="background-color: #F8FAFC;">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-title">Kontak Kami</h2>
@@ -929,7 +909,11 @@
             </div>
 
             <div class="ft-bottom">
-                <span>&copy; {{ date('Y') }} LAUNDRIA. Semua hak cipta dilindungi.</span>
+                <span>&copy; {{ date('Y') }} LANARIA. All rights reserved.</span>
+                <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 14px;font-size:13px;color:#CFE3F7;">
+                    <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;box-shadow:0 0 6px #22C55E;"></span>
+                    Sistem Laundry Online
+                </span>
             </div>
         </div>
     </footer>

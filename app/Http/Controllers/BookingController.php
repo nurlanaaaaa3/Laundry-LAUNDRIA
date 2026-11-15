@@ -14,8 +14,17 @@ class BookingController extends Controller
     public function lacakForm()
     {
         $pelanggan = Auth::guard('pelanggan')->user();
-        $transaksi = Transaksi::where('id_pelanggan', $pelanggan->id_pelanggan)
-            ->orderByDesc('id_transaksi')->get();
+        $transaksiTerbaru = Transaksi::where('id_pelanggan', $pelanggan->id_pelanggan)
+            ->latest('tanggal_masuk')
+            ->first();
+
+        // Kalau ada pesanan, langsung redirect ke halaman lacak pesanan terbaru
+        if ($transaksiTerbaru) {
+            return redirect()->route('pelanggan.lacak', $transaksiTerbaru->kode_transaksi);
+        }
+
+        // Kalau belum ada pesanan, tampilkan halaman kosong
+        $transaksi = collect();
         return view('pelanggan.lacak-form', compact('transaksi'));
     }
 
