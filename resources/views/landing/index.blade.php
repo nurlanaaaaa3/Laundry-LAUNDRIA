@@ -909,7 +909,7 @@
             </div>
 
             <div class="ft-bottom">
-                <span>&copy; {{ date('Y') }} LANARIA. All rights reserved.</span>
+                <span>&copy; {{ date('Y') }} LAUNDRIA. All rights reserved.</span>
                 <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:6px 14px;font-size:13px;color:#CFE3F7;">
                     <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;box-shadow:0 0 6px #22C55E;"></span>
                     Sistem Laundry Online
