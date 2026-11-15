@@ -18,9 +18,10 @@ class TransaksiController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->query('q');
-        $status = $request->query('status');
+        $status  = $request->query('status');
+        $tab     = $request->query('tab', 'semua');
 
-        $transaksi = Transaksi::with(['pelanggan', 'user'])
+        $transaksi = Transaksi::with(['pelanggan', 'user', 'detailTransaksi.layanan'])
             ->when($keyword, function ($query, $keyword) {
                 $query->where(function ($w) use ($keyword) {
                     $w->where('kode_transaksi', 'like', "%{$keyword}%")
@@ -32,11 +33,21 @@ class TransaksiController extends Controller
             ->when($status, function ($query, $status) {
                 $query->where('status_laundry', $status);
             })
+            ->when($tab === 'aktif', function ($query) {
+                $query->whereIn('status_laundry', ['menunggu', 'diproses']);
+            })
+            ->when($tab === 'siap_diambil', function ($query) {
+                $query->where('status_laundry', 'selesai');
+            })
+            ->when($tab === 'aging', function ($query) {
+                $query->where('tanggal_masuk', '<=', now()->subDays(3))
+                      ->whereNotIn('status_laundry', ['diambil']);
+            })
             ->orderByDesc('id_transaksi')
             ->paginate(10)
             ->withQueryString();
 
-        return view('admin.transaksi.index', compact('transaksi', 'keyword', 'status'));
+        return view('admin.transaksi.index', compact('transaksi', 'keyword', 'status', 'tab'));
     }
 
     /**

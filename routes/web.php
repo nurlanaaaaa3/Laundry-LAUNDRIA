@@ -43,6 +43,17 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/statistik', [\App\Http\Controllers\Admin\StatistikController::class, 'index'])->name('admin.statistik');
 
+        // Stok & Mesin
+        Route::get('/stok', [\App\Http\Controllers\Admin\StokController::class, 'index'])->name('admin.stok.index');
+        Route::post('/stok', [\App\Http\Controllers\Admin\StokController::class, 'storeStok'])->name('admin.stok.store');
+        Route::put('/stok/{stok}', [\App\Http\Controllers\Admin\StokController::class, 'updateStok'])->name('admin.stok.update');
+        Route::delete('/stok/{stok}', [\App\Http\Controllers\Admin\StokController::class, 'destroyStok'])->name('admin.stok.destroy');
+        Route::post('/stok/{stok}/masuk', [\App\Http\Controllers\Admin\StokController::class, 'masuk'])->name('admin.stok.masuk');
+        Route::post('/stok/{stok}/keluar', [\App\Http\Controllers\Admin\StokController::class, 'keluar'])->name('admin.stok.keluar');
+        Route::post('/mesin', [\App\Http\Controllers\Admin\StokController::class, 'storeMesin'])->name('admin.mesin.store');
+        Route::put('/mesin/{mesin}', [\App\Http\Controllers\Admin\StokController::class, 'updateMesin'])->name('admin.mesin.update');
+        Route::delete('/mesin/{mesin}', [\App\Http\Controllers\Admin\StokController::class, 'destroyMesin'])->name('admin.mesin.destroy');
+
         Route::get('/profile', [AdminProfileController::class, 'edit'])->name('admin.profile');
         Route::put('/profile', [AdminProfileController::class, 'update'])->name('admin.profile.update');
     });

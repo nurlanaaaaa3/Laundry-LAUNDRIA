@@ -614,8 +614,8 @@
                                 <div style="width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="13" r="4"/><path d="M8 7h.01M11 7h.01"/></svg>
                                 </div>
-                                <div style="text-align:right;">
-                                    <div style="font-size:18px;font-weight:700;color:#fff;line-height:1.1;">Rp{{ number_format($item->harga, 0, ',', '.') }}</div>
+                                <div style="text-align:right; min-width:0;">
+                                    <div style="font-size:15px;font-weight:700;color:#fff;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Rp{{ number_format($item->harga, 0, ',', '.') }}</div>
                                     <div style="font-size:11px;color:rgba(255,255,255,0.75);">per {{ $item->satuan }}</div>
                                 </div>
                             </div>

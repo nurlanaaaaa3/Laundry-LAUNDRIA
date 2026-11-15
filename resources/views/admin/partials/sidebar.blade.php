@@ -78,6 +78,7 @@
     .admin-content {
         flex: 1;
         min-width: 0;
+        overflow-x: hidden;
     }
     .btn-logout-sb {
         background-color: #FEE2E2;
@@ -167,6 +168,8 @@
 <div class="admin-sidebar" id="adminSidebar">
     <div class="brand">LAUNDRIA</div>
     <nav class="nav flex-column">
+        {{-- Menu Utama --}}
+        <div style="font-size:10.5px; font-weight:700; color:#94A3B8; letter-spacing:1px; text-transform:uppercase; padding:4px 14px 6px; margin-top:4px;">Menu Utama</div>
         <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
             <span class="nav-icon"></span> Dashboard
         </a>
@@ -179,12 +182,21 @@
         <a class="nav-link {{ request()->routeIs('admin.transaksi.*') ? 'active' : '' }}" href="{{ route('admin.transaksi.index') }}">
             <span class="nav-icon"></span> Transaksi
         </a>
+
+        {{-- Laporan & Sistem --}}
+        <div style="font-size:10.5px; font-weight:700; color:#94A3B8; letter-spacing:1px; text-transform:uppercase; padding:4px 14px 6px; margin-top:8px;">Laporan & Sistem</div>
         <a class="nav-link {{ request()->routeIs('admin.laporan') ? 'active' : '' }}" href="{{ route('admin.laporan') }}">
             <span class="nav-icon"></span> Laporan
         </a>
         <a class="nav-link {{ request()->routeIs('admin.statistik') ? 'active' : '' }}" href="{{ route('admin.statistik') }}">
             <span class="nav-icon"></span> Statistik Pendapatan
         </a>
+        <a class="nav-link {{ request()->routeIs('admin.stok.*') || request()->routeIs('admin.mesin.*') ? 'active' : '' }}" href="{{ route('admin.stok.index') }}">
+            <span class="nav-icon"></span> Stok & Mesin
+        </a>
+
+        {{-- Akun --}}
+        <div style="font-size:10.5px; font-weight:700; color:#94A3B8; letter-spacing:1px; text-transform:uppercase; padding:4px 14px 6px; margin-top:8px;">Akun</div>
         <a class="nav-link {{ request()->routeIs('admin.profile') ? 'active' : '' }}" href="{{ route('admin.profile') }}">
             <span class="nav-icon"></span> Profil Admin
         </a>

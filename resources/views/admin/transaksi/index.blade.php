@@ -33,13 +33,13 @@
             color: #64748B;
             background: #F8FAFC;
             border-bottom: 2px solid #E5E7EB;
-            padding: 11px 14px;
+            padding: 11px 8px;
             white-space: nowrap;
         }
         .table-trx td {
-            font-size: 13px;
+            font-size: 12.5px;
             color: #374151;
-            padding: 13px 14px;
+            padding: 11px 8px;
             vertical-align: middle;
             border-bottom: 1px solid #F1F5F9;
         }
@@ -179,6 +179,28 @@
                         </a>
                     </div>
 
+                    <div style="padding:14px 24px 0; border-bottom:1px solid #F1F5F9; display:flex; gap:4px; flex-wrap:wrap;">
+                        <a href="{{ request()->fullUrlWithQuery(['tab' => 'semua', 'page' => 1]) }}"
+                            style="padding:8px 18px; border-radius:8px 8px 0 0; font-size:13px; font-weight:600; text-decoration:none;
+                            {{ $tab === 'semua' ? 'background:#07549A; color:#fff;' : 'background:#F1F5F9; color:#64748B;' }}">
+                            Semua
+                        </a>
+                        <a href="{{ request()->fullUrlWithQuery(['tab' => 'aktif', 'page' => 1]) }}"
+                            style="padding:8px 18px; border-radius:8px 8px 0 0; font-size:13px; font-weight:600; text-decoration:none;
+                            {{ $tab === 'aktif' ? 'background:#07549A; color:#fff;' : 'background:#F1F5F9; color:#64748B;' }}">
+                            Aktif
+                        </a>
+                        <a href="{{ request()->fullUrlWithQuery(['tab' => 'siap_diambil', 'page' => 1]) }}"
+                            style="padding:8px 18px; border-radius:8px 8px 0 0; font-size:13px; font-weight:600; text-decoration:none;
+                            {{ $tab === 'siap_diambil' ? 'background:#16A34A; color:#fff;' : 'background:#F1F5F9; color:#64748B;' }}">
+                            Siap Diambil
+                        </a>
+                        <a href="{{ request()->fullUrlWithQuery(['tab' => 'aging', 'page' => 1]) }}"
+                            style="padding:8px 18px; border-radius:8px 8px 0 0; font-size:13px; font-weight:600; text-decoration:none;
+                            {{ $tab === 'aging' ? 'background:#D97706; color:#fff;' : 'background:#F1F5F9; color:#64748B;' }}">
+                            ⚠️ Aging (3+ hari)
+                        </a>
+                    </div>
                     <div class="filter-bar">
                         <form method="GET" class="d-flex align-items-center gap-2 flex-wrap w-100">
                             <div class="input-group" style="max-width:320px;">
@@ -214,11 +236,12 @@
                                     <th>Kode</th>
                                     <th>Pelanggan</th>
                                     <th>Tanggal Masuk</th>
+                                    <th>Berat/Jumlah</th>
                                     <th>Total</th>
                                     <th>Pembayaran</th>
                                     <th>Metode</th>
                                     <th>Status Laundry</th>
-                                    <th>Kasir</th>
+                                    <th>Est. Selesai</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -230,6 +253,14 @@
                                     <td>
                                         {{ $item->tanggal_masuk->format('d M Y') }}<br>
                                         <span style="font-size:11.5px; color:#94A3B8;">{{ $item->tanggal_masuk->format('H:i') }}</span>
+                                    </td>
+                                    <td>
+                                        @php
+                                            $totalJumlah = $item->detailTransaksi->sum('jumlah');
+                                            $satuan = $item->detailTransaksi->first()?->layanan?->satuan ?? '';
+                                        @endphp
+                                        <span style="font-weight:600;">{{ number_format($totalJumlah, 1) }}</span>
+                                        <span style="font-size:11.5px; color:#94A3B8;">{{ $satuan }}</span>
                                     </td>
                                     <td style="font-weight:600; color:#07549A;">
                                         Rp{{ number_format($item->total, 0, ',', '.') }}
@@ -261,7 +292,14 @@
                                             <span class="badge-pill badge-diambil">Diambil</span>
                                         @endif
                                     </td>
-                                    <td style="color:#64748B; font-size:12.5px;">{{ $item->user->nama ?? '-' }}</td>
+                                    <td>
+                                        @php
+                                            $maxEstimasi = $item->detailTransaksi->max(fn($d) => $d->layanan?->estimasi ?? 0);
+                                            $estSelesai = $item->tanggal_masuk->addHours($maxEstimasi);
+                                        @endphp
+                                        <span style="font-size:12.5px;">{{ $estSelesai->format('d M Y') }}</span><br>
+                                        <span style="font-size:11px; color:#94A3B8;">{{ $estSelesai->format('H:i') }}</span>
+                                    </td>
                                     <td>
                                         <div class="d-flex gap-1 flex-wrap">
                                             <a href="{{ route('admin.transaksi.edit', $item->id_transaksi) }}" class="btn-kelola">
@@ -281,7 +319,7 @@
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="8" class="text-center py-5">
+                                    <td colspan="10" class="text-center py-5">
                                         <i class="bi bi-inbox" style="font-size:32px; color:#CBD5E1;"></i>
                                         <p class="text-muted mt-2 mb-0" style="font-size:13px;">Belum ada data transaksi.</p>
                                     </td>
