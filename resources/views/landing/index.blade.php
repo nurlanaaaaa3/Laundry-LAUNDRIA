@@ -509,7 +509,9 @@
     <section id="beranda" class="hero-section">
         <div class="container">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6 text-center text-lg-start">
+                {{-- Di mobile: foto dulu (order-1), teks kedua (order-2) --}}
+                {{-- Di desktop: teks kiri, foto kanan --}}
+                <div class="col-lg-6 order-2 order-lg-1 text-center text-lg-start">
                     <h1>
                         <span class="hero-accent">Laundry Profesional</span>
                         Merawat Pakaian Anda Untuk Hari yang Lebih Nyaman
@@ -524,7 +526,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-1 order-lg-2">
                     <div class="hero-photo">
                         <img src="{{ asset('images/laundryservices.png') }}" alt="Layanan LAUNDRIA" class="hover-lift">
                     </div>
