@@ -108,6 +108,13 @@
             transition: all 0.15s;
         }
         .btn-hapus:hover { background: #FEE2E2; color: #B91C1C; }
+
+        /* Pagination */
+        .pagination { margin: 0; gap: 4px; }
+        .pagination .page-link { font-size: 13px; padding: 7px 13px; color: #07549A; border-radius: 8px !important; border-color: #E5E7EB; font-weight: 500; }
+        .pagination .page-link:hover { background: #EAF4FC; border-color: #07549A; }
+        .pagination .page-item.active .page-link { background: #07549A; border-color: #07549A; }
+        .pagination .page-item.disabled .page-link { color: #94A3B8; }
     </style>
 </head>
 <body>
@@ -232,8 +239,25 @@
                     </div>
 
                     @if($pelanggan->hasPages())
-                        <div class="px-4 py-3 border-top" style="border-color:#F1F5F9 !important;">
-                            {{ $pelanggan->links() }}
+                        <div class="px-4 py-3 border-top d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-color:#F1F5F9 !important;">
+                            <span style="font-size:13px; color:#64748B;">
+                                Menampilkan {{ $pelanggan->firstItem() }}–{{ $pelanggan->lastItem() }} dari {{ $pelanggan->total() }} pelanggan
+                            </span>
+                            <nav>
+                                <ul class="pagination mb-0">
+                                    <li class="page-item {{ $pelanggan->onFirstPage() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $pelanggan->previousPageUrl() }}">&laquo;</a>
+                                    </li>
+                                    @foreach($pelanggan->getUrlRange(1, $pelanggan->lastPage()) as $page => $url)
+                                        <li class="page-item {{ $pelanggan->currentPage() == $page ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+                                    <li class="page-item {{ !$pelanggan->hasMorePages() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $pelanggan->nextPageUrl() }}">&raquo;</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     @endif
                 </div>
