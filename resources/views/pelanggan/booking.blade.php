@@ -249,7 +249,7 @@
 
                         <div class="info-bayar mb-4">
                             <i class="bi bi-info-circle-fill"></i>
-                            <span>Pembayaran dilakukan saat pakaian diantar atau diambil di tempat. Total akhir disesuaikan setelah penimbangan.</span>
+                        <span>Kami akan menjemput pakaian ke rumah Anda dan mengantar kembali setelah selesai. Pembayaran tunai saat pakaian diantar, atau transfer/QRIS sebelum pengiriman. Total akhir disesuaikan setelah penimbangan.</span>
                         </div>
 
                         <div class="d-flex gap-2 flex-wrap">

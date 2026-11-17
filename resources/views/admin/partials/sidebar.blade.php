@@ -80,6 +80,9 @@
         min-width: 0;
         overflow-x: hidden;
     }
+    /* Fix pagination SVG raksasa */
+    .pagination svg { width: 16px !important; height: 16px !important; }
+    nav svg { width: 16px !important; height: 16px !important; }
     .btn-logout-sb {
         background-color: #FEE2E2;
         border: none;

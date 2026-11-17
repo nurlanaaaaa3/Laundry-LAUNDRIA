@@ -46,6 +46,21 @@
         .table-trx tbody tr:last-child td { border-bottom: none; }
         .table-trx tbody tr:hover td { background: #F8FAFC; }
 
+        /* Pagination */
+        .pagination { margin: 0; gap: 4px; }
+        .pagination .page-link { 
+            font-size: 13px; 
+            padding: 7px 13px; 
+            color: #07549A; 
+            border-radius: 8px !important; 
+            border-color: #E5E7EB;
+            font-weight: 500;
+        }
+        .pagination .page-link:hover { background: #EAF4FC; border-color: #07549A; }
+        .pagination .page-item.active .page-link { background: #07549A; border-color: #07549A; }
+        .pagination .page-item.disabled .page-link { color: #94A3B8; }
+        nav svg { width: 14px !important; height: 14px !important; }
+
         .kode-trx {
             display: inline-block;
             padding: 3px 9px;
@@ -330,8 +345,28 @@
                     </div>
 
                     @if($transaksi->hasPages())
-                        <div class="px-4 py-3 border-top" style="border-color:#F1F5F9 !important;">
-                            {{ $transaksi->links() }}
+                        <div class="px-4 py-3 border-top d-flex align-items-center justify-content-between flex-wrap gap-2" style="border-color:#F1F5F9 !important;">
+                            <span style="font-size:13px; color:#64748B;">
+                                Menampilkan {{ $transaksi->firstItem() }}–{{ $transaksi->lastItem() }} dari {{ $transaksi->total() }} transaksi
+                            </span>
+                            <nav>
+                                <ul class="pagination mb-0">
+                                    {{-- Previous --}}
+                                    <li class="page-item {{ $transaksi->onFirstPage() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $transaksi->previousPageUrl() }}">&laquo;</a>
+                                    </li>
+                                    {{-- Page numbers --}}
+                                    @foreach($transaksi->getUrlRange(1, $transaksi->lastPage()) as $page => $url)
+                                        <li class="page-item {{ $transaksi->currentPage() == $page ? 'active' : '' }}">
+                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                        </li>
+                                    @endforeach
+                                    {{-- Next --}}
+                                    <li class="page-item {{ !$transaksi->hasMorePages() ? 'disabled' : '' }}">
+                                        <a class="page-link" href="{{ $transaksi->nextPageUrl() }}">&raquo;</a>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     @endif
                 </div>
