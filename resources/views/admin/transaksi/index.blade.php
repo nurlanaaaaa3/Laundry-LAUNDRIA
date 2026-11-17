@@ -349,24 +349,7 @@
                             <span style="font-size:13px; color:#64748B;">
                                 Menampilkan {{ $transaksi->firstItem() }}–{{ $transaksi->lastItem() }} dari {{ $transaksi->total() }} transaksi
                             </span>
-                            <nav>
-                                <ul class="pagination mb-0">
-                                    {{-- Previous --}}
-                                    <li class="page-item {{ $transaksi->onFirstPage() ? 'disabled' : '' }}">
-                                        <a class="page-link" href="{{ $transaksi->previousPageUrl() }}">&laquo;</a>
-                                    </li>
-                                    {{-- Page numbers --}}
-                                    @foreach($transaksi->getUrlRange(1, $transaksi->lastPage()) as $page => $url)
-                                        <li class="page-item {{ $transaksi->currentPage() == $page ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                        </li>
-                                    @endforeach
-                                    {{-- Next --}}
-                                    <li class="page-item {{ !$transaksi->hasMorePages() ? 'disabled' : '' }}">
-                                        <a class="page-link" href="{{ $transaksi->nextPageUrl() }}">&raquo;</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <div>{{ $transaksi->links() }}</div>
                         </div>
                     @endif
                 </div>

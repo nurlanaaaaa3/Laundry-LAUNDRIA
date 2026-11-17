@@ -243,21 +243,7 @@
                             <span style="font-size:13px; color:#64748B;">
                                 Menampilkan {{ $pelanggan->firstItem() }}–{{ $pelanggan->lastItem() }} dari {{ $pelanggan->total() }} pelanggan
                             </span>
-                            <nav>
-                                <ul class="pagination mb-0">
-                                    <li class="page-item {{ $pelanggan->onFirstPage() ? 'disabled' : '' }}">
-                                        <a class="page-link" href="{{ $pelanggan->previousPageUrl() }}">&laquo;</a>
-                                    </li>
-                                    @foreach($pelanggan->getUrlRange(1, $pelanggan->lastPage()) as $page => $url)
-                                        <li class="page-item {{ $pelanggan->currentPage() == $page ? 'active' : '' }}">
-                                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                        </li>
-                                    @endforeach
-                                    <li class="page-item {{ !$pelanggan->hasMorePages() ? 'disabled' : '' }}">
-                                        <a class="page-link" href="{{ $pelanggan->nextPageUrl() }}">&raquo;</a>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <div>{{ $pelanggan->links() }}</div>
                         </div>
                     @endif
                 </div>
