@@ -272,7 +272,7 @@
     <script>
         const daftarLayanan = @json($layanan);
     </script>
-    <script src="{{ asset('js/booking-create.js') }}"></script>
+    <script src="{{ asset('js/booking-create.js') }}?v={{ filemtime(public_path('js/booking-create.js')) }}"></script>
     <script>
         function piliMetode(metode) {
             ['tunai', 'qris', 'transfer'].forEach(function(m) {

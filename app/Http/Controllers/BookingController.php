@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
+    public function konfirmasi($kode)
+    {
+        $pelanggan = Auth::guard('pelanggan')->user();
+        $transaksi = Transaksi::with('detailTransaksi.layanan')
+            ->where('kode_transaksi', $kode)
+            ->where('id_pelanggan', $pelanggan->id_pelanggan)
+            ->firstOrFail();
+
+        return view('pelanggan.konfirmasi', compact('transaksi'));
+    }
+
     public function lacakForm()
     {
         $pelanggan = Auth::guard('pelanggan')->user();
@@ -66,7 +77,7 @@ class BookingController extends Controller
             'metode_pembayaran' => 'required|in:tunai,qris,transfer',
             'layanan' => 'required|array|min:1',
             'layanan.*.id_layanan' => 'required|exists:layanan,id_layanan',
-            'layanan.*.jumlah' => 'required|numeric|min:0.1',
+            'layanan.*.jumlah' => 'required|numeric|min:0.1|max:9999',
         ]);
 
         $idPelanggan = Auth::guard('pelanggan')->id();
@@ -114,6 +125,11 @@ class BookingController extends Controller
             'transfer' => 'Pesanan ' . $transaksi->kode_transaksi . ' berhasil! Silakan transfer via Dana/GoPay/ShopeePay ke 0889-8598-4393 dan konfirmasi ke WhatsApp.',
             default    => 'Pesanan ' . $transaksi->kode_transaksi . ' berhasil! Silakan antar pakaian ke LAUNDRIA.',
         };
+
+        // Kalau transfer/QRIS, arahkan ke halaman konfirmasi pembayaran
+        if (in_array($transaksi->metode_pembayaran, ['transfer', 'qris'])) {
+            return redirect()->route('pelanggan.konfirmasi', $transaksi->kode_transaksi);
+        }
 
         return redirect()->route('pelanggan.dashboard')->with('success', $pesan);
     }

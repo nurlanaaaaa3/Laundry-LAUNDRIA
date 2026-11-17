@@ -72,6 +72,7 @@ Route::middleware('auth:pelanggan')->group(function () {
     Route::get('/user/dashboard', [BookingController::class, 'dashboard'])->name('pelanggan.dashboard');
     Route::get('/user/lacak', [BookingController::class, 'lacakForm'])->name('pelanggan.lacak.form');
     Route::get('/user/lacak/{kode}', [BookingController::class, 'lacak'])->name('pelanggan.lacak');
+    Route::get('/user/konfirmasi/{kode}', [BookingController::class, 'konfirmasi'])->name('pelanggan.konfirmasi');
     Route::get('/booking', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
     Route::get('/user/profile', [ProfileController::class, 'edit'])->name('pelanggan.profile');

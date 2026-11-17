@@ -221,31 +221,31 @@ Project ini dijalankan secara lokal (Laragon/XAMPP). Jika ingin online, hosting 
 
 **[0:00 – 0:15] Opening**
 
-"Halo, perkenalkan saya Nur Lana Agustin, siswa XII RPL dari SMKN 6 Surakarta. Saya akan mendemonstrasikan LAUNDRIA, sistem laundry online yang saya bangun menggunakan Laravel, MySQL, dan Bootstrap 5."
+"Halo, perkenalkan saya Nur Lana Agustin, siswa XII RPL dari SMKN 6 Surakarta. Saya akan mendemonstrasikan LAUNDRIA, sistem laundry online yang saya bangun menggunakan Laravel, MySQL, dan Bootstrap 5. Web ini sudah di-hosting dan bisa diakses di laundria.web.id."
 
 **[0:15 – 0:40] Landing Page**
 
-"Ini landing page yang bisa dilihat tanpa login. Ada profil LAUNDRIA, daftar layanan, daftar harga, cara kerja, dan kontak. Data layanan dan harga diambil langsung dari database, jadi otomatis berubah saat admin mengeditnya."
+"Ini landing page yang bisa dilihat tanpa login. Ada informasi layanan lengkap beserta harga, cara kerja dengan layanan antar jemput, testimoni pelanggan, dan kontak. Semua data layanan dan harga diambil langsung dari database, jadi otomatis berubah saat admin mengeditnya."
 
-**[0:40 – 1:10] Pelanggan: Register & Pesan**
+**[0:40 – 1:15] Pelanggan: Register, Pesan & Lacak**
 
-"Pelanggan klik Pesan Sekarang, lalu mendaftar akun. Setelah masuk, pelanggan memilih layanan dan jumlahnya, dan sistem menghitung estimasi total otomatis. Setelah dikirim, pelanggan mendapat kode pesanan, misalnya LDR-008, dan pesanan muncul di riwayat dengan status Menunggu."
+"Pelanggan klik Masuk lalu mendaftar akun. Setelah masuk, pelanggan memilih layanan, jumlahnya, dan metode pembayaran — bisa tunai, QRIS, atau transfer. Sistem menghitung estimasi total otomatis. Setelah dikirim, kalau memilih transfer atau QRIS, pelanggan langsung diarahkan ke halaman konfirmasi dengan tombol WhatsApp yang pesannya sudah terisi otomatis. Pelanggan juga bisa melacak status pesanan lewat menu Lacak Pesanan."
 
-**[1:10 – 1:40] Admin: Dashboard & Kelola Data**
+**[1:15 – 1:45] Admin: Dashboard & Kelola Data**
 
-"Sekarang saya login sebagai admin. Dashboard menampilkan jumlah pelanggan, transaksi, pendapatan, dan status laundry. Di menu Pelanggan dan Layanan, admin bisa menambah, mengedit, menghapus, serta mencari data."
+"Sekarang saya login sebagai admin. Dashboard menampilkan statistik jumlah pelanggan, transaksi, pendapatan, dan status laundry secara visual. Di menu Pelanggan dan Layanan, admin bisa menambah, mengedit, menghapus, serta mencari data."
 
-**[1:40 – 2:15] Admin: Transaksi**
+**[1:45 – 2:15] Admin: Transaksi & Laporan**
 
-"Di menu Transaksi, pesanan dari pelanggan tadi sudah masuk dengan kode pesanan yang sama, dan admin bisa mencarinya lewat kotak cari. Lewat tombol Kelola, admin mengubah status laundry dari Menunggu sampai Diambil, dan mengubah status pembayaran. Sistem menolak status Lunas jika pembayaran kurang dari total."
+"Di menu Transaksi, pesanan masuk dengan kode otomatis seperti LDR-013. Admin bisa filter berdasarkan tab Semua, Aktif, Siap Diambil, atau Aging. Lewat tombol Kelola, admin mengubah status laundry dan pembayaran. Di menu Laporan, admin memilih rentang tanggal untuk rekap pendapatan dan mengekspornya ke Excel atau PDF. Menu Statistik menampilkan grafik pendapatan bulanan dan tren transaksi harian."
 
-**[2:15 – 2:40] Laporan**
+**[2:15 – 2:40] Admin: Stok & Mesin**
 
-"Di menu Laporan, admin memilih rentang tanggal untuk melihat rekap transaksi dan pendapatan, lalu mengekspornya ke Excel atau PDF."
+"Ada juga fitur Stok & Mesin untuk memantau persediaan deterjen dan perlengkapan laundry. Admin bisa catat stok masuk dan keluar, lihat riwayat pemakaian, serta kelola data mesin cuci beserta statusnya."
 
 **[2:40 – 3:00] Closing**
 
-"Demikian demo singkat LAUNDRIA. Sistem ini menerapkan password hashing, Eloquent ORM yang memakai prepared statement, validasi input, token CSRF, dan guard login terpisah untuk admin dan pelanggan. Terima kasih."
+"Demikian demo singkat LAUNDRIA. Sistem ini menerapkan password hashing dengan bcrypt, Eloquent ORM dengan prepared statement, validasi input, token CSRF, guard login terpisah untuk admin dan pelanggan, serta sudah di-hosting online di laundria.web.id. Terima kasih."
 
 ---
 Dibuat untuk project UKK RPL - SMKN 6 SURAKARTA

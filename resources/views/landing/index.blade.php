@@ -25,6 +25,15 @@
             font-family: 'Playfair Display', serif;
         }
 
+        /* Hover naik untuk semua kotak */
+        .hover-lift {
+            transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 16px 32px rgba(7,84,154,0.15) !important;
+        }
+
         /* NAVBAR */
         .navbar-laundria {
             background-color: #FFFFFF;
@@ -168,27 +177,12 @@
         .ab-photo {
             position: relative;
             max-width: 440px;
-            min-height: 380px;
-            height: 100%;
             margin: 0 auto;
         }
-        .ab-photo::before {
-            content: "";
-            position: absolute;
-            top: 28px;
-            left: 0;
-            right: 18px;
-            bottom: 0;
-            background: var(--light-blue);
-            border-radius: 28px;
-        }
         .ab-photo img {
-            position: absolute;
-            z-index: 1;
-            top: 0;
-            left: 18px;
-            width: calc(100% - 18px);
-            height: calc(100% - 28px);
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
             object-fit: cover;
             object-position: 50% 25%;
             border-radius: 24px;
@@ -197,19 +191,19 @@
         .ab-badge {
             position: absolute;
             z-index: 2;
-            right: 12px;
-            bottom: 8px;
-            display: flex;
+            left: 16px;
+            bottom: 16px;
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: #FFFFFF;
             border: 1px solid var(--border-c);
-            border-radius: 16px;
-            padding: 12px 18px 12px 12px;
+            border-radius: 12px;
+            padding: 10px 16px 10px 10px;
             font-size: 13.5px;
             font-weight: 600;
             color: var(--dark-blue);
-            box-shadow: 0 16px 32px -12px rgba(6, 59, 112, 0.3);
+            box-shadow: 0 8px 24px -8px rgba(6, 59, 112, 0.25);
         }
         .ab-badge-icon {
             width: 36px;
@@ -227,10 +221,16 @@
         .ab-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
         .ab-ft {
             background: #FFFFFF;
-            border: 1px solid var(--border-c);
+            border: 1.5px solid #CBE5F7;
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 1px 2px rgba(6, 59, 112, 0.04), 0 10px 28px -16px rgba(6, 59, 112, 0.2);
+            box-shadow: 0 4px 16px rgba(6, 59, 112, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .ab-ft:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(6,59,112,0.15);
+            border-color: #07549A;
         }
         .ab-ft-icon {
             width: 42px;
@@ -313,6 +313,11 @@
             background: #FFFFFF; border: 1px solid var(--border-c); border-radius: 20px;
             padding: 32px 28px; display: flex; flex-direction: column; text-align: left;
             box-shadow: 0 1px 2px rgba(6,59,112,.04), 0 12px 32px -16px rgba(6,59,112,.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .kt-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(6,59,112,0.2);
         }
         .kt-card h3 { font-family: 'Poppins', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--dark-blue); margin: 20px 0 10px; }
         .kt-icon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: var(--light-blue); color: var(--main-blue); }
@@ -510,7 +515,7 @@
                         Merawat Pakaian Anda Untuk Hari yang Lebih Nyaman
                     </h1>
                     <p class="hero-text mx-auto mx-lg-0">
-                        Kami membantu merawat pakaian Anda agar tetap bersih, rapi, segar, dan siap digunakan setiap hari.
+                        Kami membantu merawat pakaian Anda agar tetap bersih, rapi, segar, dan siap digunakan setiap hari. Tersedia layanan <strong>antar jemput</strong> langsung ke rumah Anda.
                     </p>
 
                     <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
@@ -521,7 +526,7 @@
 
                 <div class="col-lg-6">
                     <div class="hero-photo">
-                        <img src="{{ asset('images/laundryservices.jpg') }}" alt="Layanan LAUNDRIA">
+                        <img src="{{ asset('images/laundryservices.png') }}" alt="Layanan LAUNDRIA" class="hover-lift">
                     </div>
                 </div>
             </div>
@@ -540,13 +545,17 @@
 
                 {{-- Foto --}}
                 <div class="col-lg-5">
-                    <div class="ab-photo">
-                        <img src="{{ asset('images/laundryy.jpg') }}" alt="Tentang LAUNDRIA">
-                        <div class="ab-badge">
-                            <span class="ab-badge-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
-                            </span>
-                            Bersih, Rapi, dan Wangi
+                    <div style="border-radius:24px; border:2px solid #CBE5F7; box-shadow:0 8px 32px rgba(7,84,154,0.12); overflow:hidden; transition:transform 0.3s ease,box-shadow 0.3s ease; cursor:default;"
+                         onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 20px 48px rgba(7,84,154,0.22)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow='0 8px 32px rgba(7,84,154,0.12)'">
+                        <div class="ab-photo">
+                            <img src="{{ asset('images/laundryy.jpg') }}" alt="Tentang LAUNDRIA">
+                            <div class="ab-badge">
+                                <span class="ab-badge-icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
+                                </span>
+                                Bersih, Rapi, dan Wangi
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -605,8 +614,8 @@
             <div class="row g-4">
                 @forelse ($layanan as $item)
                 <div class="col-6 col-md-4 col-lg-3">
-                    <div class="h-100 d-flex flex-column" style="background:#F8FAFC; border:1px solid #E5E7EB; border-radius:16px; overflow:hidden; transition:all 0.25s ease; box-shadow:0 4px 16px rgba(7,84,154,0.06);"
-                         onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 28px rgba(7,84,154,0.14)';this.style.borderColor='#07549A'"
+                    <div class="h-100 d-flex flex-column" style="background:#F8FAFC; border:1px solid #E5E7EB; border-radius:16px; overflow:hidden; transition:transform 0.25s ease,box-shadow 0.25s ease; box-shadow:0 4px 16px rgba(7,84,154,0.06);"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.14)';this.style.borderColor='#07549A'"
                          onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(7,84,154,0.06)';this.style.borderColor='#E5E7EB'">
                         {{-- Header kartu --}}
                         <div style="background:linear-gradient(135deg,#07549A,#1976B8); padding:14px 16px;">
@@ -661,46 +670,76 @@
     </section>
 
     {{-- Cara Kerja --}}
-    <section id="cara-kerja" style="background-color: var(--light-blue);">
+    <section id="cara-kerja" style="background: linear-gradient(160deg, #063B70 0%, #07549A 60%, #1976B8 100%);">
         <div class="container">
-            <div class="text-center">
-                <h2 class="section-title">Cara Kerja</h2>
-                <p class="section-subtitle">Proses mudah dalam 4 langkah</p>
-                <p style="color: var(--text-sec); text-align: center; max-width: 700px; margin: 0 auto 3rem;">
-                    Kami membuat proses laundry menjadi lebih praktis, cepat, dan nyaman untuk Anda.
-                    Hanya dalam beberapa langkah, pakaian Anda akan kembali bersih, rapi, wangi,
-                    dan siap digunakan.
-                </p>
+            <div class="text-center mb-5">
+                <h2 class="section-title" style="color:#FFFFFF;">Cara Kerja</h2>
+                <p class="section-subtitle" style="color:rgba(255,255,255,0.8);">Proses mudah dalam 4 langkah — dari pesan hingga pakaian kembali ke tangan Anda</p>
             </div>
-            <div class="row g-4">
+            <div class="row g-4 position-relative">
+                {{-- Garis penghubung desktop --}}
+                <div class="d-none d-lg-block" style="position:absolute;top:52px;left:calc(12.5% + 24px);right:calc(12.5% + 24px);height:2px;background:rgba(255,255,255,0.2);z-index:0;"></div>
+
                 <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">1</div>
-                        <h6>Pesan Sekarang</h6>
-                        <p>Daftar/login lalu pilih layanan laundry yang Anda butuhkan, lalu tentukan jenis perawatan yang sesuai.</p>
+                    <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:32px 24px;text-align:center;height:100%;position:relative;z-index:1;transition:all 0.25s;"
+                         onmouseover="this.style.background='rgba(255,255,255,0.15)';this.style.transform='translateY(-6px)'"
+                         onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.transform=''">
+                        <div style="width:64px;height:64px;background:#FFFFFF;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#07549A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        </div>
+                        <div style="width:28px;height:28px;background:#07549A;border:3px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;position:absolute;top:20px;left:50%;transform:translateX(-50%);">1</div>
+                        <h6 style="color:#FFFFFF;font-weight:700;font-size:16px;margin-bottom:10px;">Pesan Online</h6>
+                        <p style="color:rgba(255,255,255,0.75);font-size:13.5px;line-height:1.7;margin:0;">Daftar/login, pilih layanan dan jumlahnya. Pesan kapan saja dari mana saja.</p>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">2</div>
-                        <h6>Antar / Jemput</h6>
-                        <p>Antarkan pakaian Anda ke LAUNDRIA untuk diproses dengan teliti, atau manfaatkan layanan jemput agar lebih praktis.</p>
+                    <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:32px 24px;text-align:center;height:100%;position:relative;z-index:1;transition:all 0.25s;"
+                         onmouseover="this.style.background='rgba(255,255,255,0.15)';this.style.transform='translateY(-6px)'"
+                         onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.transform=''">
+                        <div style="width:64px;height:64px;background:#FFFFFF;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#07549A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/><circle cx="12" cy="12" r="4"/></svg>
+                        </div>
+                        <div style="width:28px;height:28px;background:#07549A;border:3px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;position:absolute;top:20px;left:50%;transform:translateX(-50%);">2</div>
+                        <h6 style="color:#FFFFFF;font-weight:700;font-size:16px;margin-bottom:10px;">🛵 Kami Jemput</h6>
+                        <p style="color:rgba(255,255,255,0.75);font-size:13.5px;line-height:1.7;margin:0;">Tim kami menjemput pakaian langsung ke rumah Anda. Praktis, tanpa perlu keluar!</p>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">3</div>
-                        <h6>Proses Pencucian</h6>
-                        <p>Pakaian dicuci dan dirawat dengan teliti sesuai jenis layanan, agar hasilnya bersih, rapi, dan wangi.</p>
+                    <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:32px 24px;text-align:center;height:100%;position:relative;z-index:1;transition:all 0.25s;"
+                         onmouseover="this.style.background='rgba(255,255,255,0.15)';this.style.transform='translateY(-6px)'"
+                         onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.transform=''">
+                        <div style="width:64px;height:64px;background:#FFFFFF;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#07549A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2"/></svg>
+                        </div>
+                        <div style="width:28px;height:28px;background:#07549A;border:3px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;position:absolute;top:20px;left:50%;transform:translateX(-50%);">3</div>
+                        <h6 style="color:#FFFFFF;font-weight:700;font-size:16px;margin-bottom:10px;">Proses Pencucian</h6>
+                        <p style="color:rgba(255,255,255,0.75);font-size:13.5px;line-height:1.7;margin:0;">Dicuci bersih, dikeringkan, dan disetrika dengan teliti. Hasilnya bersih, rapi, wangi.</p>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-lg-3">
-                    <div class="step-card">
-                        <div class="step-badge">4</div>
-                        <h6>Siap Diambil / Antar</h6>
-                        <p>Pakaian selesai dicuci dan siap diambil atau kami yang akan mengantar ke rumah Anda.</p>
+                    <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:32px 24px;text-align:center;height:100%;position:relative;z-index:1;transition:all 0.25s;"
+                         onmouseover="this.style.background='rgba(255,255,255,0.2)';this.style.transform='translateY(-6px)'"
+                         onmouseout="this.style.background='rgba(255,255,255,0.12)';this.style.transform=''">
+                        <div style="width:64px;height:64px;background:linear-gradient(135deg,#FFD700,#FFA500);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(255,165,0,0.4);">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
+                        </div>
+                        <div style="width:28px;height:28px;background:#FFD700;border:3px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#063B70;position:absolute;top:20px;left:50%;transform:translateX(-50%);">4</div>
+                        <h6 style="color:#FFFFFF;font-weight:700;font-size:16px;margin-bottom:10px;">🏠 Kami Antar</h6>
+                        <p style="color:rgba(255,255,255,0.75);font-size:13.5px;line-height:1.7;margin:0;">Pakaian bersih diantarkan langsung ke rumah Anda. Bayar tunai saat tiba, atau transfer/QRIS sebelum pengiriman.</p>
                     </div>
                 </div>
+            </div>
+
+            {{-- CTA --}}
+            <div class="text-center mt-5">
+                <a href="{{ route('login') }}" style="display:inline-flex;align-items:center;gap:10px;background:#FFFFFF;color:#063B70;font-weight:700;font-size:16px;text-decoration:none;padding:16px 36px;border-radius:14px;transition:all 0.2s;box-shadow:0 8px 24px rgba(0,0,0,0.2);"
+                   onmouseover="this.style.background='#EAF4FC';this.style.transform='translateY(-2px)'"
+                   onmouseout="this.style.background='#FFFFFF';this.style.transform=''">
+                    🛵 Pesan & Minta Dijemput Sekarang
+                </a>
             </div>
         </div>
     </section>
@@ -714,7 +753,9 @@
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
-                    <div style="background:#EAF4FC; border-radius:18px; padding:28px 24px; height:100%; text-align:center;">
+                    <div style="background:#EAF4FC; border-radius:18px; padding:28px 24px; height:100%; text-align:center; transition:transform 0.25s ease,box-shadow 0.25s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.15)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow=''">
                         <div style="width:60px; height:60px; background:#07549A; border-radius:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4.5 4.5L19 7"/></svg>
                         </div>
@@ -723,7 +764,9 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <div style="background:#DBEAFE; border-radius:18px; padding:28px 24px; height:100%; text-align:center;">
+                    <div style="background:#DBEAFE; border-radius:18px; padding:28px 24px; height:100%; text-align:center; transition:transform 0.25s ease,box-shadow 0.25s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.15)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow=''">
                         <div style="width:60px; height:60px; background:#1976B8; border-radius:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                         </div>
@@ -732,7 +775,9 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <div style="background:#E0F2FE; border-radius:18px; padding:28px 24px; height:100%; text-align:center;">
+                    <div style="background:#E0F2FE; border-radius:18px; padding:28px 24px; height:100%; text-align:center; transition:transform 0.25s ease,box-shadow 0.25s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.15)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow=''">
                         <div style="width:60px; height:60px; background:#0369A1; border-radius:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
                         </div>
@@ -741,7 +786,9 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <div style="background:linear-gradient(135deg,#063B70,#07549A); border-radius:18px; padding:28px 24px; height:100%; text-align:center;">
+                    <div style="background:linear-gradient(135deg,#063B70,#07549A); border-radius:18px; padding:28px 24px; height:100%; text-align:center; transition:transform 0.25s ease,box-shadow 0.25s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.3)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow=''">
                         <div style="width:60px; height:60px; background:rgba(255,255,255,0.2); border-radius:16px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px;">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                         </div>
@@ -762,7 +809,9 @@
             </div>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div style="background:#fff; border-radius:18px; padding:28px; height:100%; box-shadow:0 4px 20px rgba(7,84,154,0.08);">
+                    <div style="background:#fff; border-radius:18px; padding:28px; height:100%; box-shadow:0 4px 20px rgba(7,84,154,0.08); transition:transform 0.25s ease,box-shadow 0.25s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.15)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(7,84,154,0.08)'">
                         <div style="color:#F59E0B; font-size:18px; margin-bottom:14px;">★★★★★</div>
                         <p style="color:#374151; font-size:14px; line-height:1.8; margin-bottom:20px; font-style:italic;">"Laundry di sini hasilnya bersih banget dan wangi. Pelayanannya juga ramah, harganya pun terjangkau. Sudah langganan dari lama dan tidak pernah kecewa!"</p>
                         <div style="display:flex; align-items:center; gap:12px;">
@@ -775,7 +824,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div style="background:#07549A; border-radius:18px; padding:28px; height:100%; box-shadow:0 8px 28px rgba(7,84,154,0.3);">
+                    <div style="background:#07549A; border-radius:18px; padding:28px; height:100%; box-shadow:0 8px 28px rgba(7,84,154,0.3); transition:transform 0.25s ease,box-shadow 0.25s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 20px 40px rgba(7,84,154,0.4)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow='0 8px 28px rgba(7,84,154,0.3)'">
                         <div style="color:#FDE68A; font-size:18px; margin-bottom:14px;">★★★★★</div>
                         <p style="color:rgba(255,255,255,0.9); font-size:14px; line-height:1.8; margin-bottom:20px; font-style:italic;">"Sangat membantu! Pakaian selesai tepat waktu sesuai estimasi. Cocok banget buat yang sibuk seperti saya. Pasti akan order lagi!"</p>
                         <div style="display:flex; align-items:center; gap:12px;">
@@ -788,7 +839,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div style="background:#fff; border-radius:18px; padding:28px; height:100%; box-shadow:0 4px 20px rgba(7,84,154,0.08);">
+                    <div style="background:#fff; border-radius:18px; padding:28px; height:100%; box-shadow:0 4px 20px rgba(7,84,154,0.08); transition:transform 0.25s ease,box-shadow 0.25s ease;"
+                         onmouseover="this.style.transform='translateY(-8px)';this.style.boxShadow='0 16px 32px rgba(7,84,154,0.15)'"
+                         onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(7,84,154,0.08)'">
                         <div style="color:#F59E0B; font-size:18px; margin-bottom:14px;">★★★★★</div>
                         <p style="color:#374151; font-size:14px; line-height:1.8; margin-bottom:20px; font-style:italic;">"Bed cover dan gorden saya dicuci di sini, hasilnya luar biasa bersih. Tidak perlu khawatir soal kualitas, dijamin memuaskan!"</p>
                         <div style="display:flex; align-items:center; gap:12px;">
@@ -819,9 +872,9 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.3 2.4 2.4 4.6 5.8 5.6l1-1.3-1.9-1-.9.7c-.8-.4-1.6-1.2-2-2l.7-.9-1-1.9L9 9.2Z"/></svg>
                     </div>
                     <h3>Nomor WhatsApp</h3>
-                    <a class="kt-number" href="https://wa.me/6208898598393" target="_blank" rel="noopener">0889-8598-4393</a>
+                    <a class="kt-number" href="https://wa.me/628898598393" target="_blank" rel="noopener">0889-8598-4393</a>
                     <p class="kt-note">Cara tercepat untuk menghubungi kami. Pesan di jam operasional dibalas dalam hitungan menit.</p>
-                    <a class="kt-btn" href="https://wa.me/6208898598393?text=Halo%20LAUNDRIA%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20laundry." target="_blank" rel="noopener">Chat via WhatsApp</a>
+                    <a class="kt-btn" href="https://wa.me/628898598393?text=Halo%20LAUNDRIA%2C%20saya%20ingin%20bertanya%20tentang%20layanan%20laundry." target="_blank" rel="noopener">Chat via WhatsApp</a>
                 </article>
 
                 <article class="kt-card">
@@ -892,7 +945,7 @@
                     <ul class="ft-contact">
                         <li>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/><path d="M9 9.2c.3 2.4 2.4 4.6 5.8 5.6l1-1.3-1.9-1-.9.7c-.8-.4-1.6-1.2-2-2l.7-.9-1-1.9L9 9.2Z"/></svg>
-                            <a href="https://wa.me/6208898598393" target="_blank" rel="noopener">0889-8598-4393</a>
+                            <a href="https://wa.me/628898598393" target="_blank" rel="noopener">0889-8598-4393</a>
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>

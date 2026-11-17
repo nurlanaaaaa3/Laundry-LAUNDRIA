@@ -53,8 +53,8 @@
         .main-card-header { padding: 18px 24px 14px; border-bottom: 1px solid #F1F5F9; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
         /* Tabel */
-        .table-stok th { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; background: #F8FAFC; border-bottom: 2px solid #E5E7EB; padding: 11px 14px; white-space: nowrap; }
-        .table-stok td { font-size: 13px; color: #374151; padding: 12px 14px; vertical-align: middle; border-bottom: 1px solid #F1F5F9; }
+        .table-stok th { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #64748B; background: #F8FAFC; border-bottom: 2px solid #E5E7EB; padding: 10px 10px; white-space: nowrap; }
+        .table-stok td { font-size: 12.5px; color: #374151; padding: 8px 10px; vertical-align: middle; border-bottom: 1px solid #F1F5F9; }
         .table-stok tbody tr:last-child td { border-bottom: none; }
         .table-stok tbody tr:hover td { background: #F8FAFC; }
 
@@ -189,23 +189,23 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <div class="d-flex gap-1 flex-wrap">
-                                        <button class="btn-masuk" data-bs-toggle="modal"
+                                    <div class="d-flex gap-1 flex-nowrap">
+                                        <button class="btn-masuk" style="padding:3px 7px;font-size:11px;" data-bs-toggle="modal"
                                             data-bs-target="#modalMasuk{{ $item->id_stok }}">
-                                            <i class="bi bi-plus"></i> Masuk
+                                            <i class="bi bi-plus"></i>
                                         </button>
-                                        <button class="btn-keluar" data-bs-toggle="modal"
+                                        <button class="btn-keluar" style="padding:3px 7px;font-size:11px;" data-bs-toggle="modal"
                                             data-bs-target="#modalKeluar{{ $item->id_stok }}">
-                                            <i class="bi bi-dash"></i> Keluar
+                                            <i class="bi bi-dash"></i>
                                         </button>
-                                        <button class="btn-edit" data-bs-toggle="modal"
+                                        <button class="btn-edit" style="padding:3px 7px;font-size:11px;" data-bs-toggle="modal"
                                             data-bs-target="#modalEditStok{{ $item->id_stok }}">
                                             <i class="bi bi-pencil"></i>
                                         </button>
                                         <form method="POST" action="{{ route('admin.stok.destroy', $item->id_stok) }}"
                                             class="d-inline" onsubmit="return confirm('Yakin hapus item ini?')">
                                             @csrf @method('DELETE')
-                                            <button type="submit" class="btn-hapus"><i class="bi bi-trash3"></i></button>
+                                            <button type="submit" class="btn-hapus" style="padding:3px 7px;font-size:11px;"><i class="bi bi-trash3"></i></button>
                                         </form>
                                     </div>
                                 </td>

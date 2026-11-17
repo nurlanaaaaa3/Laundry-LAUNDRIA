@@ -25,7 +25,7 @@ function tambahBarisLayanan() {
                 <div class="satuan-label sel-satuan-label"></div>
             </div>
             <div class="col-7 col-sm-4">
-                <input type="number" step="0.1" min="0.1"
+                <input type="number" step="0.1" min="0.1" max="9999"
                     name="layanan[${index}][jumlah]"
                     class="form-control input-jumlah"
                     placeholder="Jumlah (kg/pcs)" required>
