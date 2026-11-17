@@ -171,8 +171,9 @@
 
         <div class="p-4">
 
-            <div class="row g-3 mb-3">
-                <div class="col-md-4 col-sm-6">
+            {{-- ── 6 Stat Cards: 2-2-2 di mobile, 3-3 di desktop ── --}}
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-4">
                     <div class="stat-card card-blue shadow-sm">
                         <div class="card-icon"><i class="bi bi-people-fill"></i></div>
                         <div class="card-label">Jumlah Pelanggan</div>
@@ -181,7 +182,7 @@
                         <div class="bg-shape"></div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-6 col-md-4">
                     <div class="stat-card card-indigo shadow-sm">
                         <div class="card-icon"><i class="bi bi-receipt-cutoff"></i></div>
                         <div class="card-label">Jumlah Transaksi</div>
@@ -190,39 +191,36 @@
                         <div class="bg-shape"></div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-6 col-md-4">
                     <div class="stat-card card-gradient shadow-sm">
                         <div class="card-icon"><i class="bi bi-cash-coin"></i></div>
                         <div class="card-label">Total Pendapatan</div>
-                        <div class="card-value" style="font-size:22px;">Rp{{ number_format($totalPendapatan, 0, ',', '.') }}</div>
+                        <div class="card-value" style="font-size:20px;">Rp{{ number_format($totalPendapatan, 0, ',', '.') }}</div>
                         <div class="card-sub">Dari transaksi lunas</div>
                     </div>
                 </div>
-            </div>
-
-            <div class="row g-3 mb-4">
-                <div class="col-md-4 col-sm-6">
+                <div class="col-6 col-md-4">
                     <div class="stat-card card-amber shadow-sm">
                         <div class="card-icon"><i class="bi bi-hourglass-split"></i></div>
-                        <div class="card-label">Transaksi Menunggu</div>
+                        <div class="card-label">Menunggu</div>
                         <div class="card-value">{{ $transaksiMenunggu }}</div>
                         <div class="card-sub">Belum diproses</div>
                         <div class="bg-shape"></div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-6 col-md-4">
                     <div class="stat-card card-blue shadow-sm">
                         <div class="card-icon"><i class="bi bi-arrow-repeat"></i></div>
-                        <div class="card-label">Transaksi Diproses</div>
+                        <div class="card-label">Diproses</div>
                         <div class="card-value">{{ $transaksiDiproses }}</div>
                         <div class="card-sub">Sedang dikerjakan</div>
                         <div class="bg-shape"></div>
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6">
+                <div class="col-6 col-md-4">
                     <div class="stat-card card-green shadow-sm">
                         <div class="card-icon"><i class="bi bi-check-circle-fill"></i></div>
-                        <div class="card-label">Transaksi Selesai</div>
+                        <div class="card-label">Selesai</div>
                         <div class="card-value">{{ $transaksiSelesai }}</div>
                         <div class="card-sub">Siap diambil</div>
                         <div class="bg-shape"></div>
@@ -296,3 +294,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
