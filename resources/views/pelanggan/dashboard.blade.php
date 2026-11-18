@@ -120,6 +120,8 @@
             text-decoration: none;
             transition: all 0.2s;
             white-space: nowrap;
+            position: relative;
+            z-index: 2;
         }
         .btn-pesan:hover {
             background: #EAF4FC;
